@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const Usuario = require('../models/usuario')
+const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion')
+
 const bcrypt = require('bcrypt') //libreria para encriptacion de una sola via, para la contraseña
 const _ =require('underscore') //una libreria de complementos de javascript para mejorar ciertas funciones
 
@@ -8,7 +10,7 @@ app.get('/', (req, res) =>{
     res.json('Hello word desde Server REST')
 })
 
-app.get('/usuario', (req, res) =>{
+app.get('/usuario', verificaToken , (req, res) =>{
     // res.json('GET usuario LOCAL!!')
     /* 
         .skip()    funcion de mongoose que recibe un valor int el cual indica el numero de registro de la BD desde
@@ -21,6 +23,7 @@ app.get('/usuario', (req, res) =>{
         .count()   un funcion de mongoose, que regresa un callback de un contador de dato especificados entre llaves
                    el contador puede ser agregado a una respuesta json()
     */
+
     let desde = req.query.desde || 0
     desde = Number(desde)
     let limite = req.query.limite || 5
@@ -50,7 +53,8 @@ app.get('/usuario', (req, res) =>{
     })
 })
 
-app.post('/usuario', (req, res) =>{
+app.post('/usuario', [verificaToken, verificaAdminRole] ,(req, res) =>{
+
     let body = req.body
 
     //instancia del Schema para aplicar las reglas y validaciones
@@ -78,7 +82,8 @@ app.post('/usuario', (req, res) =>{
 
 })
 
-app.put('/usuario/:id', (req, res) =>{
+app.put('/usuario/:id', [verificaToken, verificaAdminRole] , (req, res) =>{
+    
     let id = req.params.id
     //opciones que si se permiten acutalizar utilizando underscore( _ )
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado'])
@@ -98,7 +103,8 @@ app.put('/usuario/:id', (req, res) =>{
     })
 
 })
-app.delete('/usuario/:id', (req, res) =>{
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole] ,(req, res) =>{
+    
     let id = req.params.id
     let cambiaEstado = {
         estado: false
