@@ -1,6 +1,9 @@
 {
   "name": "rest-server",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.16.3"
+  },
   "description": "Proyecto REST server con mongoDB y Node, curso udemy",
   "main": "index.js",
   "scripts": {
