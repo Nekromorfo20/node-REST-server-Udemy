@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-const Usuario = require('../models/usuario')
-const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion')
+const Usuario = require('../models/usuario') //importando el modelo para mongoose
+const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion') //importando tokens
 
 const bcrypt = require('bcrypt') //libreria para encriptacion de una sola via, para la contraseña
 const _ =require('underscore') //una libreria de complementos de javascript para mejorar ciertas funciones
@@ -31,7 +31,7 @@ app.get('/usuario', verificaToken , (req, res) =>{
 
     Usuario.find({
         estado: true
-    },'nombre email role estado google img')
+    },'nombre email role estado google img') //campos que vas a mostrar
       .skip(desde)
       .limit(limite)
       .exec((error, usuarios) => {
