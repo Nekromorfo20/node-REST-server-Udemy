@@ -9,9 +9,17 @@
     <meta name="google-signin-client_id" content="886724958961-5eei40r0ejeejk221k50h1ebpu55elhv.apps.googleusercontent.com">
 </head>
 <body>
+
+    <!-- Imagen cargada de lo usuarios desde NodeJS, se envia como query param el token para prueba -->
+    <!-- <img src="http://localhost:3800/imagen/usuarios/5dcf001588f0e345549310cf-595.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZGNmMDAxNTg4ZjBlMzQ1NTQ5MzEwY2YiLCJub21icmUiOiJ0ZXN0MSIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwiX192IjowfSwiaWF0IjoxNTc1OTEwNDcxLCJleHAiOjE1NzYwODMyNzF9.ou6kJML9oteSudWdwgNFiomJE-sadmNcrNkP2ZKrNkg" alt="logo"> -->
+
+    <!-- Div para el SingIn de Google -->
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
+    <!-- Boton para el SignOut de Google -->
     <a href="#" onclick="signOut();">Sign out</a>
+
+    <!-- Script de Google SingIn -->
     <script>
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
